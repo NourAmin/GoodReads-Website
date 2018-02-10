@@ -1,0 +1,9 @@
+{% if all_albums %}
+<ul>
+    {% for book in all_books %}
+    <li><a href = '/books/{{Book_id}}/'> books.book_title</a> </li>
+    {% endfor %}
+{% else %}
+    <h3>you don't have any books</h3>
+{% endif %}
+</ul>
