@@ -1,5 +1,6 @@
 #from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 #from django.template import loader
 from .models import Book
 from .models import Author
@@ -20,5 +21,5 @@ def index(request):
 
 def detail(request, Book_id):
     #tit = Book.book_title
-    return HttpResponse("this is details for book id:" + str(Book_id))
+    return HttpResponse("this is details for book id:" + str(Book_id))  `
 #"<h2>this is details for book title:</h2>" + str(book_title) +"<h2> it is category is </h2>" + str(book_category) +"<h2> it discuss </h2>" + str(book_description) +"</h2>")
