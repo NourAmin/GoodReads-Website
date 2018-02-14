@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL = ('..')
+LOGIN_REDIRECT_URL = '../../books/home/'
 
 # Application definition
 
@@ -122,3 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'goodreads/media')
+
+MEDIA_URL = '/media/'
+
+LOGIN_URL = '/users/login'
