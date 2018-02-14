@@ -14,7 +14,7 @@
             <div class="col-md-12" >
                 <h2 style="color:orange">Login</h2>
                 <br>
-                <form method="post" style="color:orange;" >
+                <form id="newUser" method="post" style="color:orange;" >
                     {% for field in form %}
                         {% csrf_token %}
                     <p>{{ field.label_tag}}<font style="color:black;">{{ field}}</font></p>
@@ -28,3 +28,20 @@
     </div>
 </body>
     {% endblock %}
+    <!-- {% block javascript %}
+      <script>
+      $(document).on('submit','newUser',function(e){
+        e.preventDefault();
+        console.log('++++++++++ LOGIN')
+        $.ajax({
+          type:'POST',
+          url:'/user/login'
+        });
+      });
+      // var reg = document.getElementsByClassName('newUser');
+      // reg.addEventListener('onchange',function () {
+      //   console.log("x");
+      // });
+
+
+{% endblock %} -->

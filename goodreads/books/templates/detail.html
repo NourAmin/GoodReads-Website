@@ -20,7 +20,9 @@
         <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy'"> this book talks about {{ book.book_description }}</h1>
     </li>
 
-    <a class="btn btn-default" href="{% url 'wishList' book.id %}">wish list</a>
+    <!-- <a id="wishListBTN" class="btn btn-default" href="{% url 'wishList' book.id %}">wish list</a> -->
+    <a id="wishListBTN" class="btn btn-default">wish list</a>
+
     <a class="btn btn-default" href="{% url 'readList' book.id %}">read list</a>
 </ul>
 <p id="book_id" book_id="{{book.id}}" style="display:none">
@@ -54,6 +56,28 @@
 
 {% block javascript %}
   <script>
+  var wishListBTNz=document.getElementById('wishListBTN');
+  wishListBTNz.addEventListener('click',function () {
+    wishListBTNz.style.disable=true
+      console.log(" ++++++++++++++++++++++++++++++++++++++++ ");
+      alert("wishhhhh");
+      $.ajax({
+            url: '{% url "wishList" book.id %}',
+            data: {
+
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.rateStatus== 1) {
+                alert("added to your wishlist");
+              }
+              else if(data.rateStatus== 0){
+                alert("Your books is already on your wish list");
+              }
+
+            }
+             });
+  });
   var stars = document.getElementsByClassName('stars');
   var book_id = document.getElementById("book_id").getAttribute("book_id");
 
