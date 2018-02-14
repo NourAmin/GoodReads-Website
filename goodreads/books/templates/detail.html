@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id ="bookdiv">
+<ul>
+
+    <img src="{{ book.book_cover}}" width="200" height="256" align
+="right" alt="image name">
+
+    <li>
+        <h1>Book name is {{  book.book_title }}</h1>
+    </li>
+    <li>
+        <h1>it is written by {{ book.Author }}</h1>
+    </li>
+    <li>
+        <h1>categorized  by {{  book.book_category }} </h1>
+    </li>
+    <li>
+        <h2> this book talks about {{ book.book_description }}</h2
+>
+    </li>
+    <a class="btn btn-default" href="{% url 'wishList' book.id %}"
+>wish list</a>
+    <a class="btn btn-default" href="{% url 'readList' book.id %}"
+>read list</a>
+</ul>
+
+<br>
+
+</div>
+{% endblock %}

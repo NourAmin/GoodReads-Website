@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <p>
+        <h1>Welcome {{ request.user }}</h1>
+        <br>
+        <a href="/books">Browse all boooks: </a>
+        <h1>Your recently rated books:</h1>
+        {% for rate in UserRateList %}
+            <img class="card-img-top" src="/media/{{ rate.book.book_cover }}" alt="" style="width:250px;height:250px;">
+            <br>
+            <h3>{{ rate.book }}</h3>
+            <h6>{{ rate.rate }}</h6>
+        {% endfor %}
+
+        <h1>books that you plan to read:</h1>
+        {% for wbook in UserWishList %}
+          {{ wbook.book }}
+          <br>
+          {% if book.image %}
+          <a href="#"><img class="card-img-top" src="{{'/book'|add:wbook.image.url}}" alt="" style="width:250px;height:250px;"></a>
+          {% else %}
+          <a href="#"><img class="card-img-top" src="#" alt=""></a>
+          {% endif %}
+        {% endfor %}
+
+        <h1>books that you read:</h1>
+        {% for rbook in UserReadList %}
+          {{ rbook.book }}
+          <br>
+          {% if book.image %}
+          <a href="#"><img class="card-img-top" src="{{'/book'|add:book.image.url}}" alt="" style="width:250px;height:250px;"></a>
+          {% else %}
+          <a href="#"><img class="card-img-top" src="#" alt=""></a>
+          {% endif %}
+
+        {% endfor %}
+    </p>
+
+{% endblock %}

@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
+from Users.models import *
+from books.models import *
 
 # Create your views here.register/
 

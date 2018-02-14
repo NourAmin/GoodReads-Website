@@ -3,24 +3,19 @@ from Authors.models import Author
 from Users.models import UserProfile
 
 
-
-class Category(models.Model):
-    cat_genre = models.CharField(max_length=20)
-
+class BookCategory(models.Model):
+    name = models.CharField(max_length=100)
     def __str__(self):
-        return self.cat_genre
+        return  self.name
 
-class Book(models.Model):
-    book_title = models.CharField(max_length=50)
-    book_category = models.ForeignKey(Category, on_delete = models.CASCADE)
-    book_description = models.CharField(max_length=1000)
-    book_cover = models.CharField(max_length=1000)
-    Author = models.ForeignKey(Author, on_delete=models.CASCADE)
+class Books(models.Model):
+    book_title = models.CharField(max_length= 100)
+    book_category = models.ManyToManyField(BookCategory)
+    book_description = models.TextField()
+    published_at = models.DateField()
+    book_cover = models.FileField(null=True,blank=True)
+    Author = models.ForeignKey('Authors.Authors',null=True,on_delete=models.CASCADE)
 
 
-    def __str__(self):
+def __str__(self):
         return self.book_title
-
-
-
-    

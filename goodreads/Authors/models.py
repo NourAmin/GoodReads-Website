@@ -1,10 +1,11 @@
 from django.db import models
 
-
-class Author(models.Model):
-    author_name = models.CharField(max_length=50)
-    author_bio = models.CharField(max_length=1000)
-    author_pp = models.ImageField(blank = 'true',upload_to='profile_image')
+ # Create your models here.
+class Authors(models.Model):
+    Author_Name = models.CharField(max_length= 100)
+    Author_DoB=models.DateField(null=True, blank=True)
+    Author_Bio= models.CharField(max_length=200)
+    # image = models.FileField(null=True,blank=True)
 
     def __str__(self):
-        return self.author_name
+        return self.Author_Name

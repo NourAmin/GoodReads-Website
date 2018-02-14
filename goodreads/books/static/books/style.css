@@ -24,3 +24,8 @@ body{
 .navbar-brand{
     font-family: 'satisfy';
 }
+
+h1 a {
+    color: #000000;
+    font-family: 'Lobster';
+}

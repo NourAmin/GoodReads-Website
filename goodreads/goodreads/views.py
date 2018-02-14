@@ -1,4 +1,9 @@
-from django.shortcuts import redirect
+from django.shortcuts import render
+from django.shortcuts import render,redirect
+from books.models import *
+from Authors.models import *
+from django.views.generic import View
 
-def login_redirect(request):
-    return redirect("/users/login")
+
+def index(request):
+    return render(request,'login.html', {})

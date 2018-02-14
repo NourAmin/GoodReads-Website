@@ -1,32 +1,41 @@
 from django.db import models
 from django.contrib.auth.models import User
-from Authors.models import Author
-from django.db.models.signals import post_save
+from django.utils.timezone import now
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    user_pp = models.ImageField(blank = 'true',upload_to='profile_image')
+from django.db import models
+from django.contrib.auth.models import User
+from django.utils.timezone import now
 
-    read = models.ManyToManyField('books.Book', related_name='user_book_read')
-    wishlist = models.ManyToManyField('books.Book', related_name='user_book_wishlist')
-    user_book_rate = models.ManyToManyField('books.Book', through='BookRate')
-    user_category_fav = models.ManyToManyField('books.Category')
-    user_author_follow = models.ManyToManyField(Author)
 
-    def __str__(self):
-        return self.user.username
+class readList(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    book=models.ForeignKey('books.Books',on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
 
-    def create_profile(sender, **kwargs):
-        if kwargs['created']:
-            user_profile = UserProfile.objects.create(user=kwargs['instance'])
+# class RatedList(models.Model):
+#     user=models.ForeignKey(User,on_delete=models.CASCADE)
+#     book=models.ForeignKey('books.Books',on_delete=models.CASCADE)
+#     rate_val = models.IntegerField()
 
-    post_save.connect(create_profile, sender=User)
+class wishList(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    book=models.ForeignKey('books.Books',on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
 
-class BookRate(models.Model):
-    user = models.ForeignKey(UserProfile,
-                             on_delete=models.CASCADE)  # when deleting the user you have to delete his rate to get rid of fake accounts rating
-    book = models.ForeignKey('books.Book', on_delete=models.CASCADE)
-    rate = models.IntegerField()
+class followList(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    author=models.ForeignKey('Authors.Authors',on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.rate
+
+class rate(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    book=models.ForeignKey('books.Books',on_delete=models.CASCADE)
+    Choices = (
+        (1,  '*'),
+        (2,  '**'),
+        (3,  '***'),
+        (4,  '****'),
+        (5,  '*****'),
+      )
+    rate = models.IntegerField(default=1, choices=Choices)

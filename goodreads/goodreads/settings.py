@@ -27,14 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL = '../../books/home/'
 
 # Application definition
 
 INSTALLED_APPS = [
-    'books.apps.BooksConfig',
     'Users.apps.UsersConfig',
     'Authors.apps.AuthorsConfig',
+    'books.apps.BooksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,11 +53,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'goodreads.urls'
+#to stop redirecting to accounts
+LOGIN_REDIRECT_URL = ('/user/account')
+
+
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["goodreads/Users/templates/users/login.html","goodreads/Users/templates/users/edit_profile.html","goodreads/Users/templates/users/user.html","goodreads/Users/templates/users/reg_form.html","goodreads/Users/templates/users/profile.html", "goodreads/Authors/templates/authorDetail.html"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,9 +125,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'goodreads/media')
-
 MEDIA_URL = '/media/'
-
-LOGIN_URL = '/users/login'
+LOGIN_URL = '/user/login'
