@@ -1,10 +1,27 @@
 
-
-<h1>{{  book.book_title }}</h1>
-<h2>{{ book.Author }}</h2>
-
+{% extends 'books/base.html' %}
+{% block title %}details{% endblock %}
+{% block content %}
+<div id ="bookdiv">
 <ul>
-    {% for book in Book.Author_set.all%}
-        <li>{{ book.book_title }} - {{ book.book_description}}</li>
-    {% endfor %}    
-</ul>
+   
+            <img src="{{ book.book_cover}}" width="200" height="256" align="right" alt="image name"> 
+
+    <li>
+        <h1>Book name is {{  book.book_title }}</h1>
+    </li>
+    <li>
+        <h1>it is written by {{ book.Author }}</h1>
+    </li>
+    <li>
+        <h1>categorized  by {{  book.book_category }} </h1>
+    </li>
+    <li>
+        <h2> this book talks about {{ book.book_description }}</h2>
+    </li>
+</ul> 
+
+<br>
+
+</div>
+{% endblock %}
