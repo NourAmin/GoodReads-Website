@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
+from django.http import JsonResponse
 from Authors.models import *
 from books.models import *
 from Authors.models import *
@@ -34,7 +35,15 @@ def userFollowList(request, id):
     attempToDuplicate= followList.objects.filter(user=request.user, author_id = request.session.get('Author_id'))
     print (attempToDuplicate)
     if len(attempToDuplicate)==0:
+        print ("++++++++++++++++DuplicationNo++++++++++++++")
         followList.objects.create(user= request.user, author_id = request.session.get('Author_id'))
-        return redirect('/authors', )
+        data = {
+            'rateStatus': int(1),
+        }
+        return JsonResponse(data)
     else:
-        return redirect('/authors', )
+        print ("++++++++++++++++Duplication++++++++++++++")
+        data = {
+            'rateStatus': int(0),
+        }
+        return JsonResponse(data)

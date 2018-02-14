@@ -18,6 +18,34 @@ font-family: 'satisfy'";>
         <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">Author BoD is {{ BoD }}</h1>
     </li>
 
-    <a class="btn btn-default" href="{% url 'followList' author.id %}">Follow</a>
+    <!-- <a class="btn btn-default" href="{% url 'followList' author.id %}">Follow</a> -->
+    <a id="followListBTN" class="btn btn-default">Follow list</a>
+    <p id="followListNotification" style="color:green">Add to wish list</p>
 </div>
 {% endblock %}
+{% block javascript %}
+  <script>
+  var followListBTNz=document.getElementById('followListBTN');
+  followListBTNz.addEventListener('click',function () {
+      $.ajax({
+            url: '{% url "followList" author.id %}',
+            data: {
+
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.rateStatus== 1) {
+                alert("Added to your Follow list");
+              }
+              else if(data.rateStatus== 0){
+                // alert("Your books is already on your wish list");
+                var followListNotification=document.getElementById('followListNotification')
+                followListNotification.innerHTML = "Already on your follow list"
+                followListNotification.style.color ="red";
+              }
+
+            }
+             });
+  });
+  </script>
+  {% endblock %}
