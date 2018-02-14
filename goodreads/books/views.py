@@ -110,8 +110,8 @@ def detail(request, Book_id):
 def search(request):
     #create SearchForm Class
     text_search = request.GET.get("in")
-    book_list = Book.objects.filter(book_title__icontains= text_search)
-    author=Author.objects.filter(author_name__icontains=text_search)
+    book_list = Books.objects.filter(book_title__icontains= text_search)
+    author=Authors.objects.filter(Author_Name__icontains=text_search)
 
-    return render(request,'books/search.html',
+    return render(request,'search.html',
     {'book_list':book_list ,'author':author})

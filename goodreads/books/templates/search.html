@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <h1>Search results in books:</h1>
+
+       {% if book_list %}
+            {% for book in book_list %}
+            <div id = SearchBlock>
+                    <img src = "/media/{{ book.book_cover }}" width="150" height="150">
+                    <a href = "/books/{{ book.id }}/" > {{book.book_title}} </a>
+            </div>
+      <h1>Search results in books:</h1>
+
+       {% if book_list %}
+            {% for book in book_list %}
+            <div id = SearchBlock>
+                  <img src = "/media/{{ book.book_cover }}" widt
+h="150" height="150">
+                    <a href = "/books/{{ book.id }}/" > {{book.boo
+k_title}} </a>
+            </div>
+            {% endfor %}
+      {% else %}
+                <h6>There are no books match your search key</h6>
+      {% endif %}
+
+      <br>
+
+      <h1>Search results in authors:</h1>
+      {% if author %}
+            {% for author in author %}
+                <div id = SearchBlock>
+                        <img src="/media/{{ author.author_img }}"  width="150" height="150">
+                        <a href = "/authors/{{ author.id }}/" > {{author.Author_Name}} </a>
+                </div>
+            {% endfor %}
+      {% else %}
+                <h6>There are no athors match your search key</h6>
+      {% endif %}
+{% endblock %}
