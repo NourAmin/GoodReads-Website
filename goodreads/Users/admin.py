@@ -4,4 +4,4 @@ from .models import *
 admin.site.register(readList)
 admin.site.register(wishList)
 admin.site.register(followList)
-admin.site.register(rate)
+admin.site.register(rateList)

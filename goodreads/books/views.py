@@ -108,10 +108,22 @@ def detail(request, Book_id):
     return render(request, 'books/detail.html' , {'book' :book})
 
 def search(request):
-    #create SearchForm Class
     text_search = request.GET.get("in")
     book_list = Books.objects.filter(book_title__icontains= text_search)
     author=Authors.objects.filter(Author_Name__icontains=text_search)
 
     return render(request,'search.html',
     {'book_list':book_list ,'author':author})
+
+# Template AJAX
+def userRateList(request):
+    stars = request.GET.get('stars', None)
+    bookID = request.GET.get('bookID', None)
+    print("%_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    rateList.objects.create(user= request.user, book_id = bookID, rate=stars)
+    print("no stars"+stars)
+    print("bookid"+bookID)
+    data = {
+        'rateStatus': int(1)
+    }
+    return JsonResponse(data)

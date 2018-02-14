@@ -16,4 +16,5 @@ e='wishList'),
      re_path(r'(?P<id>[0-9]+)/readList/$', views.userReadList, nam
 e='readList'),
     re_path(r'^search/$',views.search, name='search'),
+    url(r'^rateList', views.userRateList, name='rateList'),
 ]
