@@ -17,4 +17,5 @@ e='wishList'),
 e='readList'),
     re_path(r'^search/$',views.search, name='search'),
     url(r'^rateList', views.userRateList, name='rateList'),
+    url(r'(?P<id>[0-9]+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
 ]

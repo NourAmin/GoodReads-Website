@@ -12,6 +12,9 @@ from django.db.models import Q
 from Users.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_list_or_404, get_object_or_404
+from .forms import CommentForm
+
 
 def register(request):
     if request.method == 'POST':
@@ -60,6 +63,7 @@ def index(request):
     categories = BookCategory.objects.all()
     return render(request,'index.html',
     {'books':books,'categories':categories})
+
 
 def authors(request):
     authors = authors.objects.all()
@@ -136,3 +140,17 @@ def userRateList(request):
             'bookTitle':bookTitle
         }
         return JsonResponse(data)
+
+
+def add_comment_to_post(request, id):
+    post = get_object_or_404(Books, pk=id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('details', id=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form': form})
