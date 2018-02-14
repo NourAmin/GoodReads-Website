@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect
 from books.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 
 # Create your views here.register/
@@ -24,7 +25,7 @@ def register(request):
 @login_required
 def view_profile(request):
     args = {'user':request.user}
-    return render(request, 'users/profile.html', args)
+    return render(request, 'users/account.html', args)
 @login_required
 def edit_profile(request):
     if request.method == "POST":
@@ -32,8 +33,13 @@ def edit_profile(request):
 
         if form.is_valid():
             form.save()
-            return redirect("/users/profile")
+            return redirect("/users/account")
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
-        return render(request, 'users/edit_profile.html', args)
+        return render(request, 'users/account_edit.html', args)
+
+
+def logout(request):
+    logout(request)
+    return redirect('/users/login')
