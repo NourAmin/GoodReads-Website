@@ -9,6 +9,7 @@
     <form method="post">
         {%csrf_token%}
         {{form.as_p}}
+        {{if form.password}}
         <button type="submit">Submit</button>
     </form>
 </body>

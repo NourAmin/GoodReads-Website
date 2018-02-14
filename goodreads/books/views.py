@@ -23,38 +23,3 @@ def index(request):
     #         url = '/books' + str(Book_id) + '/'
     #         #html += "<a href=" + url + "">"" + Book.book_title + "</a>"
     # return HttpResponse(url)
-
-def detail(request, Book_id):
-    #tit = Book.book_title
-    return HttpResponse("this is details for book id:" + str(Book_id))
-#"<h2>this is details for book title:</h2>" + str(book_title) +"<h2> it is category is </h2>" + str(book_category) +"<h2> it discuss </h2>" + str(book_description) +"</h2>")
-
-
-def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/books')
-    else:
-        form = RegistrationForm()
-
-        args = {'form': form}
-        return render(request, 'books/reg_form.html', args)
-
-def view_profile(request):
-    args = {'user':request.user}
-    return render(request, 'books/profile.html', args)
-
-
-def edit_profile(request):
-    if request.method == "POST":
-        form = EditProfileForm(request.POST, instance= request.user)
-
-        if form.is_valid():
-            form.save()
-            return redirect("/books/profile")
-    else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form}
-        return render(request, 'books/edit_profile.html', args)
