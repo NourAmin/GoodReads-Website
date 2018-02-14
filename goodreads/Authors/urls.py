@@ -9,5 +9,7 @@ from django.conf.urls.static import static
     # re_path (r'^$', views.index, name ='index'),
     path('',login_required(views.authors,"authors","register"),name="authors"),
     re_path(r'(?P<id>[0-9]+)/$', views.authorDetails, name = "authorDetails"),
-
+    # re_path(r'(?P<id>[0-9]+)/$', views.details, name = "details"), //book details
+    re_path(r'(?P<id>[0-9]+)/followList/$', views.userFollowList, name='followList'),
+    # re_path(r'(?P<id>[0-9]+)/wishList/$', views.userWishList, name='wishList'),//user follow list
  ]

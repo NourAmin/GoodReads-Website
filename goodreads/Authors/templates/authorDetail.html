@@ -11,7 +11,7 @@
         <h1>Author BoD is {{ BoD }}</h1>
     </li>
 
-    <a class="btn btn-default" href="">Follow</a>
+    <a class="btn btn-default" href="{% url 'followList' author.id %}">Follow</a>
 
 </div>
 {% endblock %}
