@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -8,7 +9,7 @@ from django.db import models
 #     author_photo = models.CharField(max_length = 1000)
 
 #     def __str__ (self):
-#         return self.author_name + '-' + self.author_bio 
+#         return self.author_name + '-' + self.author_bio
 class Author(models.Model):
     author_name = models.CharField(max_length=50)
     author_bio = models.CharField(max_length=1000)
@@ -36,11 +37,9 @@ class Category(models.Model):
         return self.cat_genre
 
 
-class User(models.Model):
-    user_name = models.CharField(max_length=15)
-    user_password = models.CharField(max_length=20)
-    user_email = models.CharField(max_length=50)
-    user_pp = models.CharField(max_length=1000)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    user_pp = models.ImageField(blank = 'true',upload_to='profile_image')
 
     read = models.ManyToManyField(Book, related_name='user_book_read')
     wishlist = models.ManyToManyField(Book, related_name='user_book_wishlist')
@@ -53,7 +52,7 @@ class User(models.Model):
 
 
 class Rate(models.Model):
-    user = models.ForeignKey(User,
+    user = models.ForeignKey(UserProfile,
                              on_delete=models.CASCADE)  # when deleting the user you have to delete his rate to get rid of fake accounts rating
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     rate = models.IntegerField()
