@@ -69,9 +69,9 @@ def authors(request):
 def details(request,id):
     request.session['book_id'] = id
     book = Books.objects.get(id=id)
-    summary = book.book_description
+    categories = book.book_category.all()[0]
     return render(request,"detail.html",
-    {"book":book,"summary":summary, 'categories':categories});
+    {"book":book, "categories":categories});
 
 def userWishList(request, id):
     attempToDuplicate= wishList.objects.filter(user=request.user, book_id = request.session.get('book_id'))
@@ -115,15 +115,24 @@ def search(request):
     return render(request,'search.html',
     {'book_list':book_list ,'author':author})
 
-# Template AJAX
+# AJAX
 def userRateList(request):
-    stars = request.GET.get('stars', None)
-    bookID = request.GET.get('bookID', None)
-    print("%_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-    rateList.objects.create(user= request.user, book_id = bookID, rate=stars)
-    print("no stars"+stars)
-    print("bookid"+bookID)
-    data = {
-        'rateStatus': int(1)
-    }
-    return JsonResponse(data)
+    stars = request.GET.get('stars')
+    bookID = request.GET.get('bookID')
+    bookTitle= Books.objects.get(id=bookID).book_title
+    print(bookTitle)
+    checkExistedRatings= rateList.objects.filter(user= request.user, book_id = bookID)
+    if len(checkExistedRatings)==0:
+        rateList.objects.create(user= request.user, book_id = bookID, rate=stars)
+        data = {
+            'rateStatus': int(1),
+            'bookTitle':bookTitle
+        }
+        return JsonResponse(data)
+    else:
+        rateList.objects.filter(user= request.user, book_id = bookID).update(rate=stars)
+        data = {
+            'rateStatus': int(0),
+            'bookTitle':bookTitle
+        }
+        return JsonResponse(data)
