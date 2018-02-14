@@ -48,14 +48,12 @@ def details(request,id):
 def userWishList(request, id):
     attempToDuplicate= wishList.objects.filter(user=request.user, book_id = request.session.get('book_id'))
     if len(attempToDuplicate)==0:
-        print("+++++++++++++dup")
         wishList.objects.create(user= request.user, book_id = request.session.get('book_id'))
         data = {
             'rateStatus': int(1),
         }
         return JsonResponse(data)
     else:
-        print("+++++++++++++dupelse")
         data = {
             'rateStatus': int(0),
         }
@@ -66,9 +64,15 @@ def userReadList(request, id):
     attempToDuplicate= readList.objects.filter(user=request.user, book_id = request.session.get('book_id'))
     if len(attempToDuplicate)==0:
         readList.objects.create(user= request.user, book_id = request.session.get('book_id'))
-        return redirect('/books', )
+        data = {
+            'rateStatus': int(1),
+        }
+        return JsonResponse(data)
     else:
-        return redirect('/books')
+        data = {
+            'rateStatus': int(0),
+        }
+        return JsonResponse(data)
 
 
 def categories(request,category_id):

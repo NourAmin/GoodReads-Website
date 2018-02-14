@@ -22,8 +22,10 @@
 
     <!-- <a id="wishListBTN" class="btn btn-default" href="{% url 'wishList' book.id %}">wish list</a> -->
     <a id="wishListBTN" class="btn btn-default">wish list</a>
-
-    <a class="btn btn-default" href="{% url 'readList' book.id %}">read list</a>
+    <p id="wishListNotification" style="color:green">Add to wish list</p>
+    <br>
+    <a id="readListBTN" class="btn btn-default">read list</a>
+    <p id="readListNotification" style="color:green">Add to read list</p>
 </ul>
 <p id="book_id" book_id="{{book.id}}" style="display:none">
 <div class="rating">
@@ -58,9 +60,6 @@
   <script>
   var wishListBTNz=document.getElementById('wishListBTN');
   wishListBTNz.addEventListener('click',function () {
-    wishListBTNz.style.disable=true
-      console.log(" ++++++++++++++++++++++++++++++++++++++++ ");
-      alert("wishhhhh");
       $.ajax({
             url: '{% url "wishList" book.id %}',
             data: {
@@ -69,15 +68,42 @@
             dataType: 'json',
             success: function (data) {
               if (data.rateStatus== 1) {
-                alert("added to your wishlist");
+                alert("Added to your wishlist");
               }
               else if(data.rateStatus== 0){
-                alert("Your books is already on your wish list");
+                // alert("Your books is already on your wish list");
+                var wishListNotification=document.getElementById('wishListNotification')
+                wishListNotification.innerHTML = "Already on your wish list"
+                wishListNotification.style.color ="red";
               }
 
             }
              });
   });
+
+  var readListBTNz=document.getElementById('readListBTN');
+  readListBTNz.addEventListener('click',function () {
+      $.ajax({
+            url: '{% url "readList" book.id %}',
+            data: {
+
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.rateStatus== 1) {
+                alert("Added to your readlist");
+              }
+              else if(data.rateStatus== 0){
+                var readListNotification=document.getElementById('readListNotification')
+                readListNotification.innerHTML = "Already on your read list"
+                readListNotification.style.color ="red";
+              }
+
+            }
+             });
+  });
+
+
   var stars = document.getElementsByClassName('stars');
   var book_id = document.getElementById("book_id").getAttribute("book_id");
 
