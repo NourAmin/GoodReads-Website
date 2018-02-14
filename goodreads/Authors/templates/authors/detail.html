@@ -1,0 +1,15 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Profile</h1>
+    {% if author.author_pp %}
+    <img src="{{ author.author_pp.url }}" width="400">
+    {% endif %}
+    <h2>Author: {{ author }}</h2>
+    <h2>Bio: {{ author.author_bio }}</h2>
+    <button type="submit" class="btn btn-default" onclick="window.location.href='/users/account/edit'">Follow</button>
+</div>
+
+{% endblock %}
