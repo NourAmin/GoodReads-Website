@@ -4,9 +4,9 @@
 <div id ="bookdiv">
 <ul>
 
-    <img src="{{ book.book_cover}}" width="200" height="256" align
-="right" alt="image name">
-
+    <!-- <img src="{{ book.book_cover}}" width="200" height="256" align
+="right" alt="image name"> -->
+    <img class="card-img-top" src="/media/{{ book.book_cover }}" alt="" style="width:250px;height:250px;">
     <li>
         <h1>Book name is {{  book.book_title }}</h1>
     </li>
