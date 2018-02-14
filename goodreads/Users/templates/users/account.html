@@ -1,53 +1,51 @@
-
-{% extends 'books/base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
-    <div class="container">
-        <h1>Profile</h1>
-        <p>Username: {{ user }}</p>
-        <p>First name: {{ user.first_name }}</p>
-        <p>Last name: {{ user.last_name }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Fav: {%for genre in user.userprofile.user_category_fav.all %}
-            {% if genre == user.userprofile.user_category_fav.last %}
-            {{genre}}
-             {% else %}
-            {{genre}},
-            {% endif %}
-            {% endfor %}
-        </p>
-        <p>Read: {%for read in user.userprofile.read.all %}
-            {% if read == user.userprofile.read.last %}
-            {{read}}
-            {% else %}
-            {{read}},
-            {% endif %}
-            {% endfor %}
-        </p>
-        <p>Wishlist: {%for wish in user.userprofile.wishlist.all %}
-            {% if read == user.userprofile.wishlist.last %}
-            {{wish}}
-            {% else %}
-            {{wish}},
 
-            {% endif %}
+        <p>
+            <div style=  "background-color: rgb(194, 174, 182);
+            height: auto;
+            width: 45%;
+            font-family: 'satisfy';
+            font-size: 40px";>
+            <h1 style= "text-align: center;color: #2b5b81; font-family: 'satisfy';
+            font-size: 40px">Welcome {{ request.user }}</h1>
+                    <br>
+            <a href="/books">Browse all books: </a>
+            <h1 style= "font-size: 45px; color: #2b5b81;">Your recently rated books:</h1>
+            {% for rate in UserRateList %}
+            <a href ="/books/{{ rate.book.id }}/" > <img class="card-img-top" src="/media/{{ rate.book.book_cover }}" alt="" style="width:200px;height:200px;">
+
+                {{ rate.book }}:
+            </a>
+                <h3>{{ rate.rate }} Stars</h3>
             {% endfor %}
-        </p>
-        <p>following: {%for author in user.userprofile.user_author_follow.all %}
-            {% if author == user.userprofile.user_author_follow.last %}
-            {{author}}
-            {% else %}
-            {{author}},
-            {% endif %}
+
+            <h1 style= "font-size: 45px; color: #2b5b81;">Books which you plan to read:</h1>
+            {% for wbook in UserWishList %}
+            <a href ="/books/{{ wbook.book.id }}/" > <img class="card-img-top" src="/media/{{ wbook.book.book_cover }}" alt="" style="width:200px;height:200px;">
+
+              {{ wbook.book }}</a>
+              <br>
+              <br>
             {% endfor %}
+
+            <h1 style= "font-size: 45px; color: #2b5b81;">Books which you already read:</h1>
+            {% for rbook in UserReadList %}
+              <a href ="/books/{{ rbook.book.id }}/" ><img class="card-img-top" src="/media/{{ rbook.book.book_cover }}" alt="" style="width:200px;height:200px;">
+                {{ rbook.book }}</a>
+                <br>
+                <br>
+            {% endfor %}
+
+            <h1 style= "font-size: 45px; color: #2b5b81;">Authors that you follow:</h1>
+            {% for author in UserFollowList %}
+            <a href = "/authors/{{ author.author.id }}/"> <img class="card-img-top" src="/media/{{ author.author.author_img }}" alt="" style="width:200px;height:200px;">
+              {{ author.author }}</a> <br>
+              <br>
+
+            {% endfor %}
+            </div>
         </p>
 
-        {% if user.userprofile.user_pp %}
-        <img src="{{ user.userprofile.user_pp.url }}" width="240">
-        {% endif %}
-        <br/>
-        <br/>
-        <button type="submit" class="btn btn-default" onclick="window.location.href='/users/account/edit'">Edit Profile</button>
-    </div>
 
 {% endblock %}

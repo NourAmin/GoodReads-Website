@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
+<div style=  "background-color: rgb(184, 128, 149);
+height: auto;
+width: 50%;
+font-family: 'satisfy'";>
 <img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;">
 <ul>
     <li>
-        <h1>Author name is {{ authorName}}</h1>
+        <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">Author name is {{ authorName}}</h1>
     </li>
     <li>
-        <h1>Author BIO is {{ bio }}</h1>
+        <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">Author BIO is {{ bio }}</h1>
     </li>
     <li>
-        <h1>Author BoD is {{ BoD }}</h1>
+        <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">Author BoD is {{ BoD }}</h1>
     </li>
 
     <a class="btn btn-default" href="{% url 'followList' author.id %}">Follow</a>
-
 </div>
 {% endblock %}

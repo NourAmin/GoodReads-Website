@@ -13,7 +13,7 @@
     <p>Last name: {{ user.last_name }}</p>
     <p>Email: {{ user.email }}</p>
     {% if user.userprofile.image %}
-    <img src="{{ user.userprofile.user_pp.url }}" width="240">
+    <img src="{{ user.userprofile.image.url }}" width="240">
     {% endif %}
 </div>
 

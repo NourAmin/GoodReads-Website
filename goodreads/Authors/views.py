@@ -6,9 +6,10 @@ from Authors.models import *
 from books.models import *
 from Authors.models import *
 from Users.models import *
- def index(request):
-     return HttpResponse("Hello, world. You're at the authors page")
- # Create your views here.
+def index(request):
+    return HttpResponse("Hello, world. You're at the authors page")
+# Create your views here.
+
 
 def authors(request):
     authors = Authors.objects.all()
@@ -25,17 +26,15 @@ def authorDetails(request,id):
     return render(request,"authorDetail.html",
     {"author":author ,"authorName":authorName,"bio":bio,
     'BoD':BoD});
-    
+
 def userFollowList(request, id):
     aid = request.session.get('Author_id')
     print(aid)
     print ("+++++++++++++++++++++++++++++++++")
-    attempToDuplicate= followList.objects.filter(user=request.user
-, author_id = request.session.get('Author_id'))
+    attempToDuplicate= followList.objects.filter(user=request.user, author_id = request.session.get('Author_id'))
     print (attempToDuplicate)
     if len(attempToDuplicate)==0:
-     followList.objects.create(user= request.user, author_id =
-request.session.get('Author_id'))
+        followList.objects.create(user= request.user, author_id = request.session.get('Author_id'))
         return redirect('/authors', )
     else:
         return redirect('/authors', )

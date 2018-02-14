@@ -2,12 +2,12 @@
 
 {% block content %}
     {% if authors %}
-            <h3>The authors are:</h3>
+            <h3 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">The authors are:</h3>
             <ul>
                 {% for author in authors %}
                 <div id = indexes>
-                        <img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;">
-                        <a href = "/authors/{{ author.id }}/" >{{author.Author_Name}} </a>
+                    <a href = "/authors/{{ author.id }}/" ><img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;">{{author.Author_Name}} </a>
+                        <br>
                         <br>
                 </div>
 

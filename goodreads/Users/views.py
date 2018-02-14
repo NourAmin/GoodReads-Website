@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import render
 #from django.contrib.auth.models import User,Book, Author
 from django.shortcuts import render,redirect
-# from Users.forms import RegistrationForm, EditProfileForm
+from Users.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from Users.models import *
 from books.models import *
 
@@ -14,7 +15,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/users/login')
+            return redirect('/')
     else:
         form = RegistrationForm()
 
@@ -43,7 +44,6 @@ def edit_profile(request):
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, '/users/account_edit', args)
-
 
 
 def logout(request):
