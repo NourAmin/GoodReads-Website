@@ -5,6 +5,8 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
      path('',login_required(views.index,"books","register"),name="books"),
@@ -16,4 +18,4 @@ urlpatterns = [
 #      re_path(r'^rate/(?P<rate_value>[0-5]+)/(?P<book_id>[0-9]+)$',
      url(r'^rateList', views.userRateList, name='rateList'),
      url(r'(?P<id>[0-9]+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

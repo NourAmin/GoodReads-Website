@@ -1,7 +1,79 @@
 {% extends 'base.html' %}
 
-
+{% load staticfiles %}
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}goodreads{% endblock %}</title>
+
+
+    {% load staticfiles %}
+    <link href="<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style>
+            h1 {
+                color: #000000;
+                font-family: 'Lobster';
+            }
+            .rating{
+              position:absolute;
+              <!-- top:50%;
+              left:20%; -->
+              transform:translate(-50%,-50%);
+              transform: rotateY(180deg);
+              display:flex;
+            }
+
+            .rating input{
+              display: none;
+            }
+
+            .rating label{
+              display: block;
+              cursor: pointer;
+              width: 50px;
+              background: #ccc;
+            }
+
+            .rating label:before {
+              content: '\f005';
+              font-family: fontAwesome;
+              position: relative;
+              display: block;
+              font-size: 50px;
+              color:#101010;
+            }
+
+            .rating label:after {
+              content: '\f005';
+              font-family: fontAwesome;
+              position: absolute;
+              display: block;
+              font-size: 50px;
+              color:#1f9cff;
+              top:0;
+              opacity: 0;
+              transition: .5s;
+              text-shadow:0 2px 5px rgba(0,0,0,.5);
+            }
+
+            .rating label:hover:after,
+            .rating label:hover ~ label:after,
+            .rating input:checked ~ label:after
+             {
+              opacity: 1;
+            }
+
+
+
+    </style>
+</head>
+<body>
+
+
+
 
 <div id ="bookdiv">
 <ul>
@@ -53,7 +125,7 @@
         <p style = "font-family: 'satisfy';">No comments here yet :(</p>
     {% endfor %}
       </div>
-
+</body>
 {% endblock %}
 
 {% block javascript %}

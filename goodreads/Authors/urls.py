@@ -4,6 +4,7 @@ from . import views
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     # re_path (r'^$', views.index, name ='index'),
@@ -13,4 +14,4 @@ urlpatterns = [
     re_path(r'(?P<id>[0-9]+)/followList/$', views.userFollowList, name='followList'),
     # re_path(r'(?P<id>[0-9]+)/wishList/$', views.userWishList, name='wishList'),//user follow list
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

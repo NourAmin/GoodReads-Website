@@ -9,7 +9,7 @@ from Users.models import *
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
-
+from Users.models import *
 
 from .forms import CommentForm
 
