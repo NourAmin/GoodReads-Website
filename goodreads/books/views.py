@@ -10,16 +10,22 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 from Users.models import *
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
 from .forms import CommentForm
 
 
 def index(request):
     books = Books.objects.all()
-    categories = BookCategory.objects.all()
-    return render(request,'index.html',
-    {'books':books,'categories':categories})
+    # categories = BookCategory.objects.all()
+    # return render(request,'index.html',
+    # {'books':books,'categories':categories})
+    # contact_list = Contacts.objects.all()
+    paginator = Paginator(books,1) # Show 25 contacts per page
 
+    page = request.GET.get('page')
+    books = paginator.get_page(page)
+    return render(request, 'index.html', {'books': books})
 
 def authors(request):
     authors = authors.objects.all()

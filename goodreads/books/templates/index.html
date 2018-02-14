@@ -10,14 +10,42 @@
                           <p><a href = "/books/{{ book.id }}/" ><img src = "/media/{{ book.book_cover }}" width="250" height="250">{{book.book_title}} </a></p>
 
                           <p>published: {{ book.published_at }}</p>
-                          <!-- <h1 style= "font-size: 30px;  font-family: 'satisfy';">{{ book.book_description }}</h1> -->
                           <br>
-                </div>
+                 </div>
 
                 {% endfor %}
-            </ul>
+                <center>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if books.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ books.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+                        </span>
+
+                        {% if books.has_next %}
+                            <a href="?page={{ books.next_page_number }}">next</a>
+                            <a href="?page={{ books.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+              </center>
+
+                <!-- <input type="text" id="maxBooks" name="MaxPage" value="5"><br> -->
         {% else %}
         <h3>you don't have any books</h3>
     {% endif %}
   </body>
 {% endblock %}
+<!-- {% block javascript %}
+  <script>
+  var maxBooksBTN=document.getElementById('maxBooks');
+  maxBooksBTN.addEventListener('onchange',function () {
+      console.log("zzzzzzzzzzzzz")
+
+  });
+  </script>
+  {% endblock %} -->
