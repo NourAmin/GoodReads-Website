@@ -7,16 +7,25 @@ from Authors.models import *
 from books.models import *
 from Authors.models import *
 from Users.models import *
-def index(request):
-    return HttpResponse("Hello, world. You're at the authors page")
-# Create your views here.
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+
+# def index(request):
+#     return HttpResponse("Hello, world. You're at the authors page")
+# # Create your views here.
 
 
 def authors(request):
     authors = Authors.objects.all()
-    # categories = BookCategory.objects.all()
-    return render(request,'authors.html',
-    {'authors':authors})
+    # # categories = BookCategory.objects.all()
+    # return render(request,'authors.html',
+    # {'authors':authors})
+    #
+    paginator = Paginator(authors, 1) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    authors = paginator.get_page(page)
+    return render(request, 'authors.html', {'authors': authors})
 
 def authorDetails(request,id):
     request.session['Author_id'] = id
