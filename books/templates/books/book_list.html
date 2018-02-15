@@ -1,0 +1,33 @@
+{% extends 'books/base.html' %}
+
+{% block content %}
+    {% if book_list %}
+    
+        <h3 align ="center" >here are all books</h3>
+        <ul>
+            {% for book in book_list %}
+            <div id = indexes>
+                    <a href = "/books/{{ book.id }}/" >
+                    <img src = "{{ book.book_cover }}" width="150" height="150">
+                    {{book.book_title}} </a>
+                    <form>
+                        <input type="radio" name="fav" value="favorite"> favorite<br>
+
+                        <button type="submit" value="Submit">submit</button>
+                      </form> 
+                      <form>
+                        <input type="radio" name="read" value="read"> read<br>
+                        <input type="radio" name="read" value="wishlist"> add to wishlist<br>
+                        <button type="submit" value="Submit">submit</button>
+                      </form> 
+                    <br>
+                    <br>
+            </div>
+            
+            {% endfor %}
+        </ul>    
+    {% else %}
+        <h3>you don't have any books</h3>
+    {% endif %}
+
+{% endblock %}

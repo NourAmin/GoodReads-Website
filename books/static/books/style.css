@@ -1,0 +1,26 @@
+body{
+    background:  white url("images/blue-background-books.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#bookdiv{
+    background-color: rosybrown;
+    height: 310px;
+    width: 50%;
+    font-family: 'satisfy';
+}
+
+
+#indexes{
+    font-size: 100;
+    font-family: 'satisfy';
+}
+
+.navbar{
+    border-radius: 0;
+}
+
+.navbar-brand{
+    font-family: 'satisfy';
+}

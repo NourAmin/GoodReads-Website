@@ -1,0 +1,53 @@
+
+{% extends 'books/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Profile</h1>
+        <p>Username: {{ user }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Fav: {%for genre in user.userprofile.user_category_fav.all %}
+            {% if genre == user.userprofile.user_category_fav.last %}
+            {{genre}}
+             {% else %}
+            {{genre}},
+            {% endif %}
+            {% endfor %}
+        </p>
+        <p>Read: {%for read in user.userprofile.read.all %}
+            {% if read == user.userprofile.read.last %}
+            {{read}}
+            {% else %}
+            {{read}},
+            {% endif %}
+            {% endfor %}
+        </p>
+        <p>Wishlist: {%for wish in user.userprofile.wishlist.all %}
+            {% if read == user.userprofile.wishlist.last %}
+            {{wish}}
+            {% else %}
+            {{wish}},
+
+            {% endif %}
+            {% endfor %}
+        </p>
+        <p>following: {%for author in user.userprofile.user_author_follow.all %}
+            {% if author == user.userprofile.user_author_follow.last %}
+            {{author}}
+            {% else %}
+            {{author}},
+            {% endif %}
+            {% endfor %}
+        </p>
+
+        {% if user.userprofile.user_pp %}
+        <img src="{{ user.userprofile.user_pp.url }}" width="240">
+        {% endif %}
+        <br/>
+        <br/>
+        <button type="submit" class="btn btn-default" onclick="window.location.href='/users/account/edit'">Edit Profile</button>
+    </div>
+
+{% endblock %}
