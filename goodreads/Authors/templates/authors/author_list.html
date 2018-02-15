@@ -1,0 +1,24 @@
+{% extends 'authors/base.html' %}
+
+{% block title %}indexes{% endblock %}
+{% block body %}
+    {% if author_list %}
+    
+        <h3 align ="center" >here are all authors</h3>
+        <ul>
+            {% for author in author_list %}
+            <div id = indexes>
+                    <a href = "/authors/{{ author.id }}/" >
+                    <img src = "{{ author.author_pp }}" width="150" height="150">
+                    {{author.author_name}} </a>
+                    <br>
+                    <br>
+            </div>
+            
+            {% endfor %}
+        </ul>    
+    {% else %}
+        <h3>you don't have any users</h3>
+    {% endif %}
+
+    {% endblock %}

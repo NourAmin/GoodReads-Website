@@ -1,0 +1,27 @@
+{% extends 'books/base.html' %}
+
+{% block title %}indexes{% endblock %}
+{% block body %}
+{% for book in book_list %}
+<div id = indexes>
+        <a href = "/books/{{ book.id }}/" >
+        <img src = "{{ book.book_cover }}" width="150" height="150">
+        {{book.book_title}} </a>
+        <br>
+        <br>
+</div>
+
+{% endfor %}
+
+{% for author in author %}
+<div id = indexes>
+        <a href = "/books/{{ author.id }}/" >
+        <img src = "{{ author.author_pp }}" width="150" height="150">
+        {{author.author_name}} </a>
+        <br>
+        <br>
+</div>
+
+{% endfor %}
+
+{% endblock %}
