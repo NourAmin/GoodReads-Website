@@ -1,13 +1,13 @@
+<body style="background-image: url('/media/4.jpeg') ; background-size: 100%; ">
 {% extends "base.html" %}
 
 {% block content %}
     {% if authors %}
-            <h3 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">The authors are:</h3>
+            <h3 align ="center" style= "font-size: 45px; color: orange; font-family: 'Lobster';">Authors</h3>
             <ul>
                 {% for author in authors %}
-                <div id = indexes>
-                    <a href = "/authors/{{ author.id }}/" ><img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;">{{author.Author_Name}} </a>
-                        <br>
+                <div id = indexes  style="background-color:black; opacity:0.7; width:293px; height:320px;padding-left:20px;padding-top:20px;margin-left:20px;">
+                    <a href = "/authors/{{ author.id }}/" ><img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;"><font style= "font-size: 25px; font-family: 'Lobster';">{{author.Author_Name}}</font> </a>                        <br>
                         <br>
                 </div>
 

@@ -1,17 +1,19 @@
+<body style="background-image: url('/media/4.jpeg') ; background-size: 100%; ">
 {% extends "base.html" %}
 
 {% block content %}
 
     {% if books %}
-            <h3 align ="center" style= "font-size: 45px; color: #2b5b81; font-family: 'satisfy';">The books are:</h3>
+            <h3 align ="center" style= "font-size: 45px; color: orange; font-family: 'Lobster';">Books</h3>
             <ul>
                 {% for book in books %}
-                <div id = indexes>
-                          <p><a href = "/books/{{ book.id }}/" ><img src = "/media/{{ book.book_cover }}" width="250" height="250">{{book.book_title}} </a></p>
+                <div id = indexes style="background-color:black; opacity:0.7; width:293px; height:350px;padding-left:20px;padding-top:20px;">
+                          <p><a href = "/books/{{ book.id }}/" ><img src = "/media/{{ book.book_cover }}" width="250" height="250"><br><font style= "font-size: 25px; font-family: 'Lobster';">{{book.book_title}}</font> </a></p>
 
-                          <p>published: {{ book.published_at }}</p>
+                          <p  style= "font-size: 13px; color: orange; font-family: 'Lobster';">published: {{ book.published_at }}</p>
+                          <!-- <h1 style= "font-size: 30px;  font-family: 'satisfy';">{{ book.book_description }}</h1> -->
                           <br>
-                 </div>
+                </div>
 
                 {% endfor %}
                 <center>

@@ -1,3 +1,4 @@
+<body style="background-image: url('/media/4.jpeg') ; background-size: 100%; ">
 {% extends 'base.html' %}
 
 {% load staticfiles %}
@@ -20,7 +21,7 @@
             .rating{
               position:absolute;
               <!-- top:50%;
-              left:20%; -->
+              left:3%; -->
               transform:translate(-50%,-50%);
               transform: rotateY(180deg);
               display:flex;
@@ -91,15 +92,16 @@
     <li>
         <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy'"> this book talks about {{ book.book_description }}</h1>
     </li>
-
+    <h1 style = "font-family: 'satisfy'; color: #000000;">If you find this book intersting:</h1>
     <!-- <a id="wishListBTN" class="btn btn-default" href="{% url 'wishList' book.id %}">wish list</a> -->
     <a id="wishListBTN" class="btn btn-default">wish list</a>
     <p id="wishListNotification" style="color:green">Add to wish list</p>
     <br>
     <a id="readListBTN" class="btn btn-default">read list</a>
     <p id="readListNotification" style="color:green">Add to read list</p>
-</ul>
+
 <p id="book_id" book_id="{{book.id}}" style="display:none">
+<h1 style = "font-family: 'satisfy'; color: #000000;">Rate this book:</h1>
 <div class="rating">
   <input type="radio" name="star" id="star1" class="stars"><label for="star1"></label>
   <input type="radio" name="star" id="star2" class="stars"><label for="star2"></label>
@@ -115,16 +117,21 @@
 
 <hr>
 <br>
-<a style = "font-family: 'satisfy';" class="btn btn-default" href="{% url 'add_comment_to_post' id=book.id %}">Add comment</a>
-{% for comment in book.comments.all %}
-    <div class="comment">
-        <div style = "font-family: 'satisfy';" class="date">{{ comment.created_date }}</div>
-        <strong style = "font-family: 'satisfy';">{{ comment.author }}</strong>
-        <p style = "font-family: 'satisfy';">{{ comment.text|linebreaks }}</p>
-        {% empty %}
-        <p style = "font-family: 'satisfy';">No comments here yet :(</p>
-    {% endfor %}
-      </div>
+<center>
+<!-- <div style= position: absolute; right:150px;> -->
+      <a style = "font-family: 'satisfy';" "right:-20%;" class="btn btn-default" href="{% url 'add_comment_to_post' id=book.id %}">Add comment</a>
+      {% for comment in book.comments.all %}
+        <div class="comment">
+            <div style = "font-family: 'satisfy'; color: #2b5b81; " class="date">{{ comment.created_date }}</div>
+            <strong style = "font-family: 'satisfy'; color: #2b5b81;">{{ comment.author }}</strong>
+            <strong style = "font-family: 'satisfy'; color: #888888;">{{ comment.text|linebreaks }}</strong>
+            {% empty %}
+            <p style = "font-family: 'satisfy'; color: #888888;">No comments here yet :(</p>
+        {% endfor %}
+          </div>
+<!-- </div> -->
+<center>
+  </ul>
 </body>
 {% endblock %}
 
