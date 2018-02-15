@@ -1,51 +1,57 @@
-{% extends "base.html" %}
-{% block content %}
+<body style="background-image: url('/media/3.jpeg') ; background-size:cover; ">
 
-        <p>
-            <div style=  "background-color: rgb(194, 174, 182);
-            height: auto;
-            width: 45%;
-            font-family: 'satisfy';
-            font-size: 40px";>
-            <h1 style= "text-align: center;color: #2b5b81; font-family: 'satisfy';
-            font-size: 40px">Welcome {{ request.user }}</h1>
-                    <br>
-            <a href="/books">Browse all books: </a>
-            <h1 style= "font-size: 45px; color: #2b5b81;">Your recently rated books:</h1>
-            {% for rate in UserRateList %}
-            <a href ="/books/{{ rate.book.id }}/" > <img class="card-img-top" src="/media/{{ rate.book.book_cover }}" alt="" style="width:200px;height:200px;">
-
-                {{ rate.book }}:
-            </a>
-                <h3>{{ rate.rate }} Stars</h3>
-            {% endfor %}
-
-            <h1 style= "font-size: 45px; color: #2b5b81;">Books which you plan to read:</h1>
-            {% for wbook in UserWishList %}
-            <a href ="/books/{{ wbook.book.id }}/" > <img class="card-img-top" src="/media/{{ wbook.book.book_cover }}" alt="" style="width:200px;height:200px;">
-
-              {{ wbook.book }}</a>
-              <br>
-              <br>
-            {% endfor %}
-
-            <h1 style= "font-size: 45px; color: #2b5b81;">Books which you already read:</h1>
-            {% for rbook in UserReadList %}
-              <a href ="/books/{{ rbook.book.id }}/" ><img class="card-img-top" src="/media/{{ rbook.book.book_cover }}" alt="" style="width:200px;height:200px;">
-                {{ rbook.book }}</a>
-                <br>
-                <br>
-            {% endfor %}
-
-            <h1 style= "font-size: 45px; color: #2b5b81;">Authors that you follow:</h1>
-            {% for author in UserFollowList %}
-            <a href = "/authors/{{ author.author.id }}/"> <img class="card-img-top" src="/media/{{ author.author.author_img }}" alt="" style="width:200px;height:200px;">
-              {{ author.author }}</a> <br>
-              <br>
-
-            {% endfor %}
+    {% extends "base.html" %}
+    {% block content %}
+    
+            <div style="margin-left:20px;">
+                <div>
+                    <h1 style= "text-align: center;color: black; font-family: 'Lobster';
+                            font-size: 40px">Welcome {{ request.user }}</h1>
+                            <br>
+                    <div style="background-color:#e1e1d0; width:500px;padding-left:20px">
+                            <!--<a href="/books">Browse all books </a>-->
+                            <h1 style= "font-size: 30px; color: #2b5b81;">Your recently rated books:</h1><br>
+                            {% for rate in UserRateList %}
+                        <a href ="/books/{{ rate.book.id }}/" > <img class="card-img-top" src="/media/{{ rate.book.book_cover }}" alt="" style="width:200px;height:200px;"><br>
+                                <font style="color: #cc0000;font-size:20 ;font-family: 'Lobster';">{{ rate.book }}</font>
+                            </a>
+                                <h3 style="color:#cc0000;font-family: 'Lobster';">{{ rate.rate }}Stars</h3>
+                            {% endfor %}
+                                <br><br>
+                    </div>
+                    <div style="background-color:#e1e1d0; width:500px;padding-left:20px">
+                            <h1 style= "font-size: 30px; color: #2b5b81;">Books which you plan to read:</h1>
+                            {% for wbook in UserWishList %}
+                            <br>
+                            <a href ="/books/{{ wbook.book.id }}/" > <img class="card-img-top" src="/media/{{ wbook.book.book_cover }}" alt="" style="width:200px;height:200px;">
+                                <br><font style="color: #cc0000;font-size:20 ;font-family: 'Lobster';">{{ wbook.book }}</font></a>
+                              <br>
+                              <br>
+                            {% endfor %}
+                                <br><br>
+                    </div>
+                    <div style="background-color:#e1e1d0; width:500px;padding-left:20px">
+                            <h1 style= "font-size: 30px; color: #2b5b81;">Books which you already read:</h1><br>
+                            {% for rbook in UserReadList %}
+                            <br>
+                              <a href ="/books/{{ rbook.book.id }}/" ><img class="card-img-top" src="/media/{{ rbook.book.book_cover }}" alt="" style="width:200px;height:200px;">
+                                  <br><font style="color: #cc0000;font-size:20 ;font-family: 'Lobster';">{{ rbook.book }}</font></a>
+                                <br>
+                                <br>
+                            {% endfor %}
+                    </div>
+                    <div style="background-color:#e1e1d0; width:500px;padding-left:20px">
+                            <h1 style= "font-size: 30px; color: #2b5b81;">Authors that you follow:</h1>
+                            {% for author in UserFollowList %}
+                            <br>
+                            <a href = "/authors/{{ author.author.id }}/"> <img class="card-img-top" src="/media/{{ author.author.author_img }}" alt="" style="width:200px;height:200px;">
+                              <br><font style="color: #cc0000;font-size:20 ;font-family: 'Lobster';">{{ author.author }}</font></a> <br>
+                              <br>
+                    </div>
+                            {% endfor %}
+                </div>
             </div>
-        </p>
-
-
-{% endblock %}
+    
+    
+    {% endblock %}
+    

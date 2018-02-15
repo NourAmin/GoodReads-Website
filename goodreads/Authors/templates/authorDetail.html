@@ -4,10 +4,10 @@
 
 
 {% block content %}
-<div style="width:100%; height:100%;padding-left:20px;padding-top:20px;background-color:black; opacity:0.7;width:50%; height:80%">
-  <img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;">
+<div style="text-align:center;background-color:black; opacity:0.9; width:100%; height:100%;padding-left:20px;padding-top:20px;">
+  <img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;">
 
-<ul>
+<ul style="  list-style-type: none;">
     <li>
         <h1 style= "font-size: 30px; color: #2b5b81; font-family: 'satisfy' ">Author name is {{ authorName}}</h1>
     </li>
@@ -19,7 +19,7 @@
     </li>
 
     <a id="followListBTN" class="btn btn-default">Follow list</a>
-    <p id="followListNotification" style="color:green">Add to wish list</p>
+    <p id="followListNotification" style="color:orange;font-family:satisfy; font-size:20px">Add to follow list</p>
 </div>
 {% endblock %}
 </body>

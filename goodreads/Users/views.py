@@ -18,10 +18,8 @@ def register(request):
             return redirect('/')
     else:
         form = RegistrationForm()
-
-        args = {'form': form}
-        return render(request, 'users/reg_form.html', args)
-
+    args = {'form': form}
+    return render(request, 'users/reg_form.html', args)
 
 @login_required
 def view_profile(request):
