@@ -10,6 +10,6 @@ urlpatterns = [
      path('',login_required(views.index,"books","register"),name="books"),
      re_path(r'(?P<id>[0-9]+)/$', views.details, name = "details"),
      re_path(r'(?P<id>[0-9]+)/wishList/$', views.userWishList, name='wishList'),
-
      re_path(r'(?P<id>[0-9]+)/readList/$', views.userReadList, name='readList'),
+     re_path(r'^search/$',views.search, name='search'),
 ]

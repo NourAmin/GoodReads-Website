@@ -55,3 +55,12 @@ def categories(request,category_id):
     category = categoryList(user_id= request.user.id,category_id=category_id)
     category.save()
     return JsonResponse(1,safe=False)
+
+def search(request):
+    #create SearchForm Class
+    text_search = request.GET.get("in")
+    book_list = Books.objects.filter(book_title__icontains= text_search)
+    author=Authors.objects.filter(Author_Name__icontains=text_search)
+
+    return render(request,'search.html',
+    {'book_list':book_list ,'author':author})
