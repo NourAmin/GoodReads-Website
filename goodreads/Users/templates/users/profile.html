@@ -27,14 +27,7 @@
 
         <h1>Authors that you follow:</h1>
         {% for author in UserFollowList %}
-          <!-- {{ author.author }}
-          <br>
-          <!-- {% if author.image %}
-          <a href="#"><img class="card-img-top" src="{{'/book'|add:book.image.url}}" alt="" style="width:250px;height:250px;"></a>
-          {% else %}
-          <a href="#"><img class="card-img-top" src="#" alt=""></a>
-          {% endif %} --> -->
-          <img class="card-img-top" src="/media/{{ author.authors.image }}" alt="" style="width:50px;height:50px;">
+          <img class="card-img-top" src="/media/{{ author.author.author_img }}" alt="" style="width:150px;height:150px;">
           <br>
           <h5>{{ author.author }}</h5>
         {% endfor %}

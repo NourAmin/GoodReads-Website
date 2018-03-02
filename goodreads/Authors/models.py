@@ -6,6 +6,7 @@ class Authors(models.Model):
     Author_DoB=models.DateField(null=True, blank=True)
     Author_Bio= models.CharField(max_length=200)
     # image = models.FileField(null=True,blank=True)
+    author_img = models.FileField(null=True,blank=True)
 
     def __str__(self):
         return self.Author_Name

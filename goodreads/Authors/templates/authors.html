@@ -6,7 +6,7 @@
             <ul>
                 {% for author in authors %}
                 <div id = indexes>
-                        <!-- <img src = "/media/{{ book.book_cover }}" width="150" height="150"> -->
+                        <img class="card-img-top" src="/media/{{ author.author_img }}" alt="" style="width:250px;height:250px;">
                         <a href = "/authors/{{ author.id }}/" >{{author.Author_Name}} </a>
                         <br>
                 </div>
