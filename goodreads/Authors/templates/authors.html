@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if authors %}
+            <h3>The authors are:</h3>
+            <ul>
+                {% for author in authors %}
+                <div id = indexes>
+                        <!-- <img src = "/media/{{ book.book_cover }}" width="150" height="150"> -->
+                        <a href = "/authors/{{ author.id }}/" >{{author.Author_Name}} </a>
+                        <br>
+                </div>
+
+                {% endfor %}
+            </ul>
+        {% else %}
+        <h3>you don't have any books</h3>
+    {% endif %}
+{% endblock %}

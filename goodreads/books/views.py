@@ -1,21 +1,57 @@
-from django.http import Http404
 from django.shortcuts import render
-from .models import Book
-from .models import Author
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render,redirect
+from books.models import *
+from Authors.models import *
+from Users.models import *
 
-
-# Create your views here.
+from django.views.generic import View
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
-    # book_list =Book.objects.all()
-    # context = {'book_list': book_list}
-    # return render(request, 'books/book_list.html', context)
-   return HttpResponse("Hello, world. You're at the book index.")
-def detail(request, Book_id):
-    try:
-    #tit = Book.book_title
-        book = Book.objects.get(pk=Book_id)
-    except Book.DoesNotExist:
-        raise Http404("book does not exist")
-    return render(request, 'books/detail.html' , {'book' :book})
+    books = Books.objects.all()
+    categories = BookCategory.objects.all()
+    return render(request,'index.html',
+    {'books':books,'categories':categories})
+
+
+def authors(request):
+    authors = authors.objects.all()
+    return render(request,'authors.html',
+    {'authors':authors})
+
+def details(request,id):
+    request.session['book_id'] = id
+    book = Books.objects.get(id=id)
+    summary = book.book_description
+    return render(request,"detail.html",
+    {"book":book,"summary":summary,
+    'categories':categories});
+
+
+def userWishList(request, id):
+    attempToDuplicate= wishList.objects.filter(user=request.user, book_id = request.session.get('book_id'))
+    if len(attempToDuplicate)==0:
+        wishList.objects.create(user= request.user, book_id = request.session.get('book_id'))
+        return redirect('/books', )
+    else:
+        return redirect('/books', )
+
+
+
+def userReadList(request, id):
+    attempToDuplicate= readList.objects.filter(user=request.user, book_id = request.session.get('book_id'))
+    if len(attempToDuplicate)==0:
+        readList.objects.create(user= request.user, book_id = request.session.get('book_id'))
+        return redirect('/books', )
+    else:
+        return redirect('/books')
+
+
+
+def categories(request,category_id):
+    category = categoryList(user_id= request.user.id,category_id=category_id)
+    category.save()
+    return JsonResponse(1,safe=False)
