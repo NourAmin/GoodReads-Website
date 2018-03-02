@@ -25,8 +25,9 @@ def view_profile(request):
     UserRateList=rate.objects.filter(user=request.user)
     UserReadList=readList.objects.filter(user=request.user)
     UserWishList=wishList.objects.filter(user=request.user)
+    UserFollowList=followList.objects.filter(user=request.user)
     print (UserRateList)
-    return render(request, 'users/profile.html', {'UserRateList':UserRateList, 'UserReadList':UserReadList, 'UserWishList':UserWishList})
+    return render(request, 'users/profile.html', {'UserRateList':UserRateList, 'UserReadList':UserReadList, 'UserWishList':UserWishList, 'UserFollowList':UserFollowList})
 @login_required
 def edit_profile(request):
     if request.method == "POST":
