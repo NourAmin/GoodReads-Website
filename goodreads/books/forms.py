@@ -2,8 +2,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from books.models import *
 
-from books.models import UserProfile
+# from books.models import UserProfile
 
 
 class RegistrationForm(UserCreationForm):
@@ -44,3 +45,9 @@ class EditProfileForm(UserChangeForm):
             'password'
         )
 
+
+class CommentForm( forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('author','text',)

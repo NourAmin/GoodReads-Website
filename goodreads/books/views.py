@@ -6,9 +6,13 @@ from django.shortcuts import render,redirect
 from books.models import *
 from Authors.models import *
 from Users.models import *
-
+from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
+
+
+from .forms import CommentForm
+
 
 def index(request):
     books = Books.objects.all()
@@ -80,3 +84,17 @@ def userRateList(request):
             'bookTitle':bookTitle
         }
         return JsonResponse(data)
+
+
+def add_comment_to_post(request, id):
+    post = get_object_or_404(Books, pk=id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('details', id=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form': form})

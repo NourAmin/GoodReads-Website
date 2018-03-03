@@ -15,4 +15,5 @@ urlpatterns = [
      # re_path(r'^rate/(?P<rate_value>[0-5]+)/(?P<book_id>[0-9]+)$', views.rate_book, name='rate_book'),
 #      re_path(r'^rate/(?P<rate_value>[0-5]+)/(?P<book_id>[0-9]+)$',
      url(r'^rateList', views.userRateList, name='rateList'),
+     url(r'(?P<id>[0-9]+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
 ]
