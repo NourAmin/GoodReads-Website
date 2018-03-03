@@ -39,8 +39,6 @@ def userWishList(request, id):
     else:
         return redirect('/books', )
 
-
-
 def userReadList(request, id):
     attempToDuplicate= readList.objects.filter(user=request.user, book_id = request.session.get('book_id'))
     if len(attempToDuplicate)==0:
@@ -50,17 +48,33 @@ def userReadList(request, id):
         return redirect('/books')
 
 
-
 def categories(request,category_id):
     category = categoryList(user_id= request.user.id,category_id=category_id)
     category.save()
     return JsonResponse(1,safe=False)
 
 def search(request):
-    #create SearchForm Class
     text_search = request.GET.get("in")
     book_list = Books.objects.filter(book_title__icontains= text_search)
     author=Authors.objects.filter(Author_Name__icontains=text_search)
-
     return render(request,'search.html',
     {'book_list':book_list ,'author':author})
+
+#
+# def rate_book(request,rate_value,book_id):
+#     rate = RatedList(user_id= request.user.id,book_id = book_id,rate_val = rate_value )
+#     rate.save()
+#     return JsonResponse(1,safe=False)
+
+# Template AJAX
+def userRateList(request):
+    stars = request.GET.get('stars', None)
+    bookID = request.GET.get('bookID', None)
+    print("%_%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    rateList.objects.create(user= request.user, book_id = bookID, rate=stars)
+    print("no stars"+stars)
+    print("bookid"+bookID)
+    data = {
+        'rateStatus': int(1)
+    }
+    return JsonResponse(data)

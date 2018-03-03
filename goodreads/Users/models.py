@@ -28,8 +28,12 @@ class followList(models.Model):
     author=models.ForeignKey('Authors.Authors',on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
 
+# class rateList(models.Model):
+#     user=models.ForeignKey(User,on_delete=models.CASCADE)
+#     book=models.ForeignKey('books.Books',on_delete=models.CASCADE)
+#     rate_val = models.IntegerField()
 
-class rate(models.Model):
+class rateList(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     book=models.ForeignKey('books.Books',on_delete=models.CASCADE)
     Choices = (

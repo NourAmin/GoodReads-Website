@@ -5,7 +5,6 @@
 <div id ="bookdiv">
 <ul>
 
-    <!-- <img src="{{ book.book_cover}}" width="200" height="256" align="right" alt="image name"> -->
     <img class="card-img-top" src="/media/{{ book.book_cover }}" alt="" style="width:250px;height:250px;">
     <li>
         <h1>Book name is {{  book.book_title }}</h1>
@@ -19,11 +18,86 @@
     <li>
         <h2> this book talks about {{ book.book_description }}</h2>
     </li>
+    <input type="text" required="" name="username" maxlength="150" id="id_username" autofocus="">
     <a class="btn btn-default" href="{% url 'wishList' book.id %}">wish list</a>
     <a class="btn btn-default" href="{% url 'readList' book.id %}">read list</a>
 </ul>
+<p id="book_id" book_id="{{book.id}}" style="display:none">
+<div class="rating">
+  <input type="radio" name="star" id="star1" class="stars"><label for="star1"></label>
+  <input type="radio" name="star" id="star2" class="stars"><label for="star2"></label>
+  <input type="radio" name="star" id="star3" class="stars"><label for="star3"></label>
+  <input type="radio" name="star" id="star4" class="stars"><label for="star4"></label>
+  <input type="radio" name="star" id="star5" class="stars"><label for="star5"></label>
+</div>
+
+
+
+<!-- <div class="card-footer">
+
+
+  {% for i in "x"|ljust:checked  %}
+    <small class="fa fa-star checked" id="{{i}}"></small>
+  {% endfor %}
+
+  {% for i in "x"|ljust:unchecked  %}
+    <small class="fa fa-star" id="{{i}}"></small>
+  {% endfor %}
+
+</div> -->
+
 
 <br>
 
 </div>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+  // $("#id_username").change(function () {
+  //   var username = $(this).val();
+  //   console.log( $(this).val() );
+  //
+  //   $.ajax({
+  //urlllll hna
+  //     data: {
+  //       'username': username
+  //     },
+  //     dataType: 'json',
+  //     success: function (data) {
+  //       if (data.is_taken) {
+  //         alert("A user with this username already exists.");
+  //       }
+  //     }
+  //   });
+  //
+  // });
+  var stars = document.getElementsByClassName('stars');
+  var book_id = document.getElementById("book_id").getAttribute("book_id");
+
+  stars[0].addEventListener('click',function () { //because of rotating 180 so 5 stars means id 0
+      var stars=5
+      console.log("no stars= "+stars)
+      var bookID=book_id
+      console.log("book id= "+bookID)
+      $.ajax({
+            url: '{% url "rateList" %}',
+            data: {
+              'stars': stars,
+              'bookID':bookID
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.rateStatus== 1) {
+                alert("Your rate saved");
+              }
+              else{
+                alert("You already rated this book");
+              }
+
+            }
+             });
+  });
+  </script>
+
 {% endblock %}

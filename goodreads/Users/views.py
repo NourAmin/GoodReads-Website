@@ -14,15 +14,18 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/books')
+            return redirect('/users/login')
     else:
         form = RegistrationForm()
+
         args = {'form': form}
         return render(request, 'users/reg_form.html', args)
+
+
 @login_required
 def view_profile(request):
     userName = {'user':request.user}
-    UserRateList=rate.objects.filter(user=request.user)
+    UserRateList=rateList.objects.filter(user=request.user)
     UserReadList=readList.objects.filter(user=request.user)
     UserWishList=wishList.objects.filter(user=request.user)
     UserFollowList=followList.objects.filter(user=request.user)
